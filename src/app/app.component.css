@@ -1,0 +1,13 @@
+.bg-light {background-color: #1ed287 !important;box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);}
+.navbar-expand-md {padding: 0;}
+.navbar-light .navbar-nav .nav-link.active{border-bottom: 2px solid #ffffff;}
+.navbar-light .navbar-nav .nav-link {padding: 15px;}
+.navbar-brand{font-family: 'Baloo Bhai', cursive;}
+.navbar-brand:hover,.navbar-brand,.navbar-light .navbar-nav .nav-link{color: #fff;}
+
+@media (max-width: 767px){
+    .navbar-light .navbar-nav .nav-link.active{border-bottom: 0;background: #2bc183;}
+    .nav-header{flex: 1;display: flex;justify-content: space-between;padding: 5px 15px;}
+    .navbar-light .navbar-toggler{color: #fff;border:0;padding: 0;}
+    .navbar-toggler:focus{outline:none}
+}

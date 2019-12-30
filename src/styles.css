@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Open Sans', sans-serif !important;
+    color: #2d2d2d;
+    font-size: 14px;
+}
+
+
+.btn-primary{background-color: #1ed287 !important;border-color: #1ed287 !important;}
+.btn-primary:hover {color: #fff;background-color: #26bf7f !important; border-color: #26bf7f !important;}
+.btn-primary:focus,.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(30, 210, 135,.5) !important;
+}
+.card {border: 1px solid #e9ecef;}
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #1ed287;
+    background-color: #1ed287;
+}
+.custom-control-input:focus~.custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(30, 210, 135,.25);
+}
+.custom-control-input:not(:disabled):active~.custom-control-label::before {
+    color: #fff;
+    background-color: #b4ffe0;
+    border-color: #b4ffe0;
+}
+.section-padding{padding: 100px 0;}
+.form-header{background-color: #1ed287 !important;margin: -20px -20px 30px;color: #fff;padding:15px 20px;font-weight: 500;text-transform: uppercase;}
+
+@media(max-width:767px){
+    .form-header {
+        padding: 15px 20px;
+        font-size: 20px;
+    }
+}

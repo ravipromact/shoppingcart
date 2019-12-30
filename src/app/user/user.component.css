@@ -1,0 +1,13 @@
+.signupForm{height: 100vh;}
+
+.error-text {color: #fd394b;margin: 5px 0 10px;font-size: 12px;}
+label {margin-bottom: 0;}
+.form-width{max-width: 540px;margin: 0 auto;box-shadow: 0 0 4px #00000014;border-radius: 0;}
+.form-control {font-size: 14px; padding: 0;color: #495057;border: 0;border-bottom: 1px solid rgba(126, 138, 181, 0.2);border-radius: 0;}
+.form-control:focus {border-color: #1ed287 !important;box-shadow: none;}
+form label,.btn-primary{font-weight: 600;}
+.btn-primary{text-transform: uppercase;font-weight: 600;}
+@media(max-width:767px){
+    .signupForm{padding: 110px 0 50px;height: auto;}
+    
+}

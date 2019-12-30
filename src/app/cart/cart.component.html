@@ -1,0 +1,158 @@
+<section class="section-padding">   
+    <div class="container" >    
+        <div class="row">
+            <div class="col-12">
+                <div class="d-md-flex justify-content-between">
+                    <h5 class="text-md-left text-center mb-md-0">Games in Stores</h5>
+                    <div class="d-flex align-items-center sort-order flex-md-nowrap flex-wrap justify-content-center justify-content-md-end">
+                        <div class="custom-control custom-radio">                    
+                            <input type="radio" id="price-filter" name="filter" class="custom-control-input" (change)="filterByPrice()" />
+                            <label class="custom-control-label" for="price-filter">Price: Low to High</label>
+                        </div>
+                        <div class="custom-control custom-radio">                    
+                            <input type="radio" id="ratings-filter" name="filter" class="custom-control-input" (change)="filterByRatings()" />
+                            <label class="custom-control-label" for="ratings-filter">Ratings</label>
+                        </div>
+                        <div class="custom-control custom-radio">                    
+                            <input type="radio" id="alphabet-filter" name="filter" class="custom-control-input" (change)="filterByAlphabet()" />
+                            <label class="custom-control-label" for="alphabet-filter">A to Z</label>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-0">
+                <div class="row">
+                    <div class="col-xl-3 col-md-4 mt-4" *ngFor="let x of items;let i = index">
+                        <div class="card game-card">                                
+                            <div class="card-body">
+                                <img [src]="x.cover" class="img-fluid game-cover">
+                                <h5 class="text-center game-title">{{x.name}}</h5>
+                                <div class="d-flex align-items-center justify-content-between">                                                
+                                    <div>                                                    
+                                        <div [ngSwitch]="x.ratings">
+                                            <div *ngSwitchCase="1">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3,4]"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="1.5">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3]"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="2">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2]"><i class="fa fa-star"></i></li>                                                                
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3]"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="2.5">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2]"><i class="fa fa-star"></i></li> 
+                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>                                                               
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2]"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="3">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3]"><i class="fa fa-star"></i></li>                                                                                                                            
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2]"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="3.5">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3]"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>                                                                                                                                     
+                                                    <li class="list-inline-item" ><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="4">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3,4]"><i class="fa fa-star"></i></li>                                                                                                                                                                                                 
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="4.5">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3,4]"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>                                                                                                                                                                                                     
+                                                </ul>
+                                            </div>
+                                            <div *ngSwitchCase="5">
+                                                <ul class="list-inline ratings">
+                                                    <li class="list-inline-item" *ngFor="let x of [1,2,3,4,5]"><i class="fa fa-star"></i></li>                                                               
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0"> &#x20B9; {{x.price}}/-</p></div>
+                                <button id="cartBtn-{{i}}" class="btn btn-primary w-100 mt-3" (click)="additem(i)" >{{btnText}}</button>         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h4 class="mt-5 text-center">Cart Details</h4>
+
+                <div *ngIf="!addedItems" class="text-center"><p>No Items added yet!</p></div>
+                <div *ngIf="addedItems">    
+                    <ul class="list-group mt-3" id="accordionExample">
+                        <li class="list-group-item " *ngFor="let x of arraylist;let i = index">
+                            <div class="d-flex flex-wrap align-items-center">
+                                <p class="mb-0 mr-auto game-title-added"><b>{{x.name}}</b></p>
+                                <button class="btn btn-link product-details mr-auto mx-md-auto" type="button" data-toggle="collapse" attr.data-target="#collapse{{i}}">
+                                    Product Details
+                                </button>
+                                <div class="ml-auto">                            
+                                    <button class="btn btn-danger btn-sm" (click)="removeitem(i)">Remove</button>
+                                </div>                        
+                            </div>                           
+                            <div id="collapse{{i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body px-0">                            
+                                <div class="d-md-flex align-items-start">
+                                    <img [src]="x.cover" width="150" class="mr-2 img-fluid img-thumbnail">
+                                    <div class="px-md-3 games-details">
+                                        <h4 class="mb-3 mt-3 mt-md-0">General Specification</h4>
+                                        <p>In The Box 1 x {{x.name}} PC Game</p>
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <tr>
+                                                    <th>Model Name</th>
+                                                    <td>{{x.name}} PC Game</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Edition</th>
+                                                    <td>Complete Edition</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Genre</th>
+                                                    <td>Action-Adventure</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Developer</th>
+                                                    <td>Ubisoft Montreal, Massive Entertainment, and Ubisoft Shanghai</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center justify-content-between">
+                            <b>Total Items in Cart: {{total}}</b>
+                            <button class="btn btn-primary btn-sm " (click)="checkout(i)">Check out</button>
+                        </li>                    
+                    </ul>
+                </div>
+            </div>        
+        </div>
+    </div>
+</section> 
+
+
+
