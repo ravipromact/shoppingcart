@@ -34,3 +34,10 @@ body{
         font-size: 20px;
     }
 }
+.signup .navbar{display: none;}
+.sticky-bar{transition: top 0.4s;top: 0;}
+.sticky.sticky-bar{background: #fff;
+    padding: 20px 0 20px;
+    position: sticky;
+    top: 53px;
+    z-index: 9;box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);}

@@ -1,5 +1,5 @@
 
-<section class="section-padding"  *ngIf="!orderPlaced">   
+<section class="section-padding" *ngIf="!orderPlaced">   
     <div class="container">    
         <div class="row">
             <div class="col-12">
@@ -19,59 +19,110 @@
                 <div>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="form-header">Order Summary</h4>
+                            <h4 class="form-header d-flex align-items-center">Order Summary 
+                                <a routerLink="/home" class="back-btn ml-auto"><i class="fa fa-angle-left"></i></a></h4>
                             <h5>Shipping Details</h5>
-                            <div class="mb-0">
-                                <div *ngFor="let x of itemsList">
-                                    <div class="d-flex">
-                                        <div class="title">Name</div>
-                                        <div>{{x.firstname}} {{x.lastname}}</div >
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="title">Email</div>
-                                        <div>{{x.email}}</div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="title">Address</div>
-                                        <div>{{x.address}}</div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="title">City</div>
-                                        <div>{{x.city}}</div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="title">Contact</div>
-                                        <div>{{x.contact}}</div>
-                                    </div>
+                            <div *ngIf="itemsList">
+                                <div class="d-flex">
+                                    <div class="title">Name</div>
+                                    <div>{{itemsList.firstname}} {{itemsList.lastname}}</div >
+                                </div>
+                                <div class="d-flex">
+                                    <div class="title">Email</div>
+                                    <div>{{itemsList.email}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="title">Address</div>
+                                    <div>{{itemsList.address}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="title">City</div>
+                                    <div>{{itemsList.city}}</div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="title">Contact</div>
+                                    <div>{{itemsList.contact}}</div>
                                 </div>
                             </div>
+                            
                             <h5 class="mt-3">Order Details</h5>
-                            <table class="table table-bordered mb-0">
-                                <tr>
-                                    <th>Item</th>
-                                    <th class="text-right">Price</th>
-                                </tr>
-                                <tr *ngFor="let x of products;let i = index">
-                                    <td>                                            
-                                        <div class="d-md-flex align-items-start">
-                                            <img [src]="x.cover" width="70" class="img-fluid mr-3 img-thumbnail">
-                                            <div>
-                                                <p class="product-title mt-2 mt-md-0">{{x.name}}</p>
-                                                <p class="details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                            <div >
+                                <table class="table table-bordered mb-0" id="accordionExample">
+                                    <ng-container >
+                                    <tr>
+                                        <th>Item</th>
+                                        <th width="100" class="text-right d-none d-md-table-cell">Price</th>
+                                    </tr>
+                                    <tr *ngFor="let x of arraylist;let i = index" >
+                                        <td>                                            
+                                            <div class="d-md-flex align-items-start">
+                                                <img [src]="x.cover" width="70" class="img-fluid mr-3 img-thumbnail">
+                                                <div>
+                                                    <p class="product-title mt-2 mt-md-0">{{x.name}}</p>
+                                                    <p class="details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                                                    <button class="btn btn-link product-details mr-auto mx-md-auto" type="button" data-toggle="collapse" attr.data-target="#collapse{{i}}">
+                                                        Product Details
+                                                    </button>
+                                                    <div id="collapse{{i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                        <div class="card-body px-0">                            
+                                                        <div class="d-md-flex align-items-start">
+                                                            <!-- <img [src]="x.cover" width="150" class="mr-2 img-fluid img-thumbnail"> -->
+                                                            <div class="px-md-3 games-details">
+                                                                <h4 class="mb-3 mt-3 mt-md-0">General Specification</h4>
+                                                                <p>In The Box 1 x {{x.name}} PC Game</p>
+                                                                <div class="table-responsive">
+                                                                    <table class="table mb-0">
+                                                                        <tr>
+                                                                            <th>Model Name</th>
+                                                                            <td>{{x.name}} PC Game</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Edition</th>
+                                                                            <td>Complete Edition</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Genre</th>
+                                                                            <td>Action-Adventure</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Developer</th>
+                                                                            <td>Ubisoft Montreal, Massive Entertainment, and Ubisoft Shanghai</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    <!-- <label>Qty:</label>
+                                                    <select (change)="callType(items.value,x.price,i)" #items>
+                                                        <option value="1">1</option> 
+                                                        <option value="2">2</option> 
+                                                        <option value="3">3</option> 
+                                                    </select> -->
+                                                </div>
+                                                <div class="ml-md-auto d-flex align-items-center justify-content-between">                                                
+                                                    <p class="d-md-none mb-0">Price: &#x20B9;{{x.price}}</p>
+                                                    <button class="btn btn-danger btn-sm" (click)="removeitem(x.id,i,x);"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </div>
+                                                
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">&#x20B9;{{x.price}}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <button class="btn btn-primary btn-sm " (click)="placeOrder()">Place Order</button> 
-                                            <p class="text-right mb-0"><b>Total: &#x20B9;{{totalprice}}/-</b></p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+                                        </td>
+                                        <td class="text-right d-none d-md-table-cell">&#x20B9;{{x.price}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="d-flex align-items-center justify-content-between flex-md-row flex-row-reverse">
+                                                <button class="btn btn-primary btn-sm " (click)="placeOrder()" [hidden]="!itemsAdded">Place Order</button> 
+                                                <p class="text-right mb-0 ml-md-auto mr-auto mr-md-0" ><b>Total: &#x20B9;{{totalprice}}/-</b></p>
+                                                <!-- {{totalprice + items.value * x.price}} -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>                

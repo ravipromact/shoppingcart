@@ -1,24 +1,39 @@
-<section class="section-padding">   
-    <div class="container" >    
-        <div class="row">
-            <div class="col-12">
-                <div class="d-md-flex justify-content-between">
-                    <h5 class="text-md-left text-center mb-md-0">Games in Stores</h5>
-                    <div class="d-flex align-items-center sort-order flex-md-nowrap flex-wrap justify-content-center justify-content-md-end">
-                        <div class="custom-control custom-radio">                    
-                            <input type="radio" id="price-filter" name="filter" class="custom-control-input" (change)="filterByPrice()" />
-                            <label class="custom-control-label" for="price-filter">Price: Low to High</label>
-                        </div>
-                        <div class="custom-control custom-radio">                    
-                            <input type="radio" id="ratings-filter" name="filter" class="custom-control-input" (change)="filterByRatings()" />
-                            <label class="custom-control-label" for="ratings-filter">Ratings</label>
-                        </div>
-                        <div class="custom-control custom-radio">                    
-                            <input type="radio" id="alphabet-filter" name="filter" class="custom-control-input" (change)="filterByAlphabet()" />
-                            <label class="custom-control-label" for="alphabet-filter">A to Z</label>
+<section class="section-padding" >   
+    <div class="sticky-bar" #stickyMenu [class.sticky] = "sticky">
+        <div class="container" >
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-md-flex justify-content-between">
+                        <h5 class="text-md-left text-center mb-md-0">Games in Stores</h5>
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-end">                        
+                            <div class="d-flex align-items-center sort-order flex-md-nowrap flex-wrap justify-content-center justify-content-md-end">
+                                <div class="custom-control custom-radio">                    
+                                    <input type="radio" id="price-filter" checked name="filter" class="custom-control-input" (change)="filterByPrice()" />
+                                    <label class="custom-control-label" for="price-filter">Price: Low to High</label>
+                                </div>
+                                <div class="custom-control custom-radio">                    
+                                    <input type="radio" id="ratings-filter" name="filter" class="custom-control-input" (change)="filterByRatings()" />
+                                    <label class="custom-control-label" for="ratings-filter">Ratings</label>
+                                </div>
+                                <div class="custom-control custom-radio">                    
+                                    <input type="radio" id="alphabet-filter" name="filter" class="custom-control-input" (change)="filterByAlphabet()" />
+                                    <label class="custom-control-label" for="alphabet-filter">A to Z</label>
+                                </div>
+                            </div>
+                            <div class="cart-icon">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <span class="cart-count">{{total}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" >    
+        <div class="row">
+            <div class="col-12">
+                
                 <hr class="mb-0">
                 <div class="row">
                     <div class="col-xl-3 col-md-4 mt-4" *ngFor="let x of items;let i = index">
@@ -87,19 +102,27 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="mb-0"> &#x20B9; {{x.price}}/-</p></div>
-                                <button id="cartBtn-{{i}}" class="btn btn-primary w-100 mt-3" (click)="additem(i)" >{{btnText}}</button>         
+                                    <p class="mb-0"> &#x20B9; {{x.price}}/-</p>
+                                </div>
+                                <div *ngIf="!x.added">
+                                    <button class="btn btn-primary w-100 mt-3" (click)="additem(x,i);">Add To Cart</button>
+                                </div>
+                                <div *ngIf="x.added ">
+                                    <button class="btn btn-primary w-100 mt-3" (click)="removeitem(x.id,x);">Remove From Cart</button>
+                                </div>    
                             </div>
                         </div>
                     </div>
                 </div>
 
 
-                <h4 class="mt-5 text-center">Cart Details</h4>
+                <!-- <h4 class="mt-5 text-center">Cart Details</h4> -->
 
-                <div *ngIf="!addedItems" class="text-center"><p>No Items added yet!</p></div>
-                <div *ngIf="addedItems">    
-                    <ul class="list-group mt-3" id="accordionExample">
+                <!-- <div *ngIf="!addedItems" class="text-center"><p>No Items added yet!</p></div> -->
+                <div *ngIf="addedItems" class="checkout-block">
+                    <button class="btn btn-primary btn-sm " routerLink="/checkout">Check out <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>   
+                    
+                    <!-- <ul class="list-group mt-3" >
                         <li class="list-group-item " *ngFor="let x of arraylist;let i = index">
                             <div class="d-flex flex-wrap align-items-center">
                                 <p class="mb-0 mr-auto game-title-added"><b>{{x.name}}</b></p>
@@ -107,7 +130,7 @@
                                     Product Details
                                 </button>
                                 <div class="ml-auto">                            
-                                    <button class="btn btn-danger btn-sm" (click)="removeitem(i)">Remove</button>
+                                    <button class="btn btn-danger btn-sm" (click)="removeitem(x.id,x)">Remove</button>
                                 </div>                        
                             </div>                           
                             <div id="collapse{{i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -142,12 +165,8 @@
                                 
                                 </div>
                             </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center justify-content-between">
-                            <b>Total Items in Cart: {{total}}</b>
-                            <button class="btn btn-primary btn-sm " (click)="checkout(i)">Check out</button>
                         </li>                    
-                    </ul>
+                    </ul> -->
                 </div>
             </div>        
         </div>

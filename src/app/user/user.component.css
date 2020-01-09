@@ -1,5 +1,7 @@
+.site-brand{margin-bottom: 30px;}
+h1{font-family: 'Baloo Bhai', cursive;margin: 0 0 0 15px;color: #1ed287;}
+.site-brand img{width: 57px;}
 .signupForm{height: 100vh;}
-
 .error-text {color: #fd394b;margin: 5px 0 10px;font-size: 12px;}
 label {margin-bottom: 0;}
 .form-width{max-width: 540px;margin: 0 auto;box-shadow: 0 0 4px #00000014;border-radius: 0;}
@@ -8,6 +10,7 @@ label {margin-bottom: 0;}
 form label,.btn-primary{font-weight: 600;}
 .btn-primary{text-transform: uppercase;font-weight: 600;}
 @media(max-width:767px){
-    .signupForm{padding: 110px 0 50px;height: auto;}
-    
+    .signupForm{padding: 20px 0 50px;height: auto;}
+    h1{font-size: 30px;}
+    .site-brand img{width: 40px;}
 }

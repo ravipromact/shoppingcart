@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top ">
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top " (voted)="onVoted($event)">
   <div class="container"> 
     <div class="nav-header">
       <a class="navbar-brand" href="#"><img src="assets/img/console.svg" width="40"> Game Zone</a>
@@ -10,15 +10,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="user">Home</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="cart">Products</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="checkout">Check Out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="signup">Sign up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">{{total}}</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
 <div><router-outlet></router-outlet></div>
-

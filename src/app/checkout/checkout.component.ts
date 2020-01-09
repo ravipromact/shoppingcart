@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, SimpleChanges, QueryList, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, QueryList, ViewChildren, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ShoppinCartService } from '../shared/shoppin-cart.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -7,65 +8,80 @@ import { ShoppinCartService } from '../shared/shoppin-cart.service'
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-
-  constructor(private cartService:ShoppinCartService) { }
-
   userId:any;
   itemsList:any
-  products:any;
+  arraylist:any;
   totalprice:number = 0;
   orderPlaced:boolean = false;
   loader:boolean = false;
+  itemsAdded:boolean
+  constructor(private cartService:ShoppinCartService,private router:Router) {
+    
+   }
+
   ngOnInit() {
     /**
       * To initialize form values
       */
-    this.getUserDetails();
+    if (localStorage.getItem("userdetails") != null) {
+      this.itemsList = this.cartService.getUserData()
+    }
 
     /**
       * To initialize product details
       */
-    this.cartService.currentProducts.subscribe(value => this.products = value )
+   
+    if (localStorage.getItem("products") != null) {
+      this.arraylist = this.cartService.getProducts()
+      if(this.arraylist.length<=0){
+        this.itemsAdded = false
+      }else{this.itemsAdded = true}
+      /**
+        * To initialize cart value
+        */
+      this.totalprice = this.arraylist.reduce((acc, val) => acc += val.price, 0)
+    }
 
-    /**
-      * To initialize cart value
-      */
-    this.totalprice = this.products.reduce((acc, val) => acc += val.price, 0)
  }
 
-  /**
-    * To subscribe currentUser Observable 
-    * in shopping-cart service to get form values
-    */
-  getUserDetails() {
-    this.cartService.currentUser.subscribe(item => {
-      this.itemsList = item
-    }, err => {
-      console.log(err);
-    });
-  }
 
+  
   /**
     * Method to place Order 
     */
   placeOrder(){    
     this.loader = true
-    setTimeout(()=>{    //<<<---    using ()=> syntax
+    setTimeout(()=>{   
       this.orderPlaced = true
       this.loader = false
-    }, 3000);
+      localStorage.removeItem('products')
+      localStorage.removeItem('userdetails')
+    }, 1500);
     
   }
-  // removeitem(i){
-  //   this.message.splice(i,1)
-  //   this.totalprice = this.message.reduce((acc, val) => acc += val.price, 0)
-  // }
-  // @ViewChildren('items') items: QueryList<ElementRef>;
+ 
+  removeitem(id,i){
+    for(i = 0; i < this.arraylist.length; i++) {
+      if(this.arraylist[i].id == id) {
+        this.arraylist.splice(i, 1);
+        this.cartService.setProduct(this.arraylist)
+      }
+    }
+    if(this.arraylist.length<=0){
+      this.itemsAdded = false
+    }else{this.itemsAdded = true}
+    this.totalprice = this.arraylist.reduce((acc, val) => acc += val.price, 0)
+    this.arraylist = this.cartService.getProducts()   
+  }
+
   
-  // callType(value,price,i){
-  //   var asd = price * value
-  //   this.itemsList.map(tag => tag.price).reduce((a, b) => a + b, 0);
-  //   this.totalprice = this.message.reduce((value, price) => value += val.price, 0)
-  // }
+  callType(value,price,i){
+    // var asd = price * value
+    // this.itemsList.map(tag => tag.price).reduce((a, b) => a + b, 0);
+    // this.totalprice = this.message.reduce((value, price) => value += val.price, 0)
+    // for(i=0;i<this.products.length;i++){
+    //   this.totalprice = 
+    // }
+  }
 
 }

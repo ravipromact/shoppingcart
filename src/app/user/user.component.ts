@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { ShoppinCartService } from '../shared/shoppin-cart.service'
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   city:string;
   contact:number;
   dataArray:any[] = [];
-
+ 
   /**
    * Captures values of form on submit 
    * and passes into dataArray
@@ -29,12 +29,15 @@ export class UserComponent implements OnInit {
     this.address = signupForm.control.get('address').value;
     this.city = signupForm.control.get('city').value;
     this.contact = signupForm.control.get('contact').value;
-    this.dataArray.push({firstname:this.firstname,lastname:this.lastname,email:this.email,address:this.address,city:this.city,contact:this.contact})
-    this.cartService.setUser(this.dataArray); 
-    this.router.navigate(['/','cart'])
+    this.cartService.setUserData(signupForm.value)
+    this.router.navigate(['/','home'])
   } 
-
-  ngOnInit() {
+  
+  ngOnInit() {    
+    document.body.classList.add("signup");
+  }
+  ngOnDestroy(){
+    document.body.classList.remove("signup");
   }
 
 }
