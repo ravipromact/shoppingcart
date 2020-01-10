@@ -57,13 +57,16 @@
                       </div>
                       <div class="form-group">
                         <label>Contact no. <span class="required-star">*</span></label>
-                        <input type="text" class="form-control" name="contact" minlength="10" maxlength="10" ngModel #contact="ngModel" required>
+                        <input type="text" (keypress)="onlyDigit($event)" class="form-control" name="contact" minlength="10" maxlength="10" ngModel #contact="ngModel" required>
                         <div *ngIf="contact.invalid && (contact.dirty || contact.touched)"class="error-text">
                           <div *ngIf="contact.errors.required">
                             Contact is required.
                           </div>
                           <div *ngIf="contact.errors.minlength">
-                            Conact number must be at least 10 characters long.
+                            Contact must be at least 10 characters long.
+                          </div>
+                          <div *ngIf="nodigit">
+                            Contact should be numbers only
                           </div>
                         </div>
                       </div>

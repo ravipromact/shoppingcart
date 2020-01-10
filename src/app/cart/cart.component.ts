@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive, Output, EventEmitter, ViewChildren, QueryList, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit,ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ShoppinCartService } from '../shared/shoppin-cart.service'
 import { Router } from '@angular/router';
 
@@ -22,9 +22,8 @@ export class CartComponent implements OnInit {
   ]
   total:any = 0;
   addedItems:boolean = false;
-  totalprice:number;
-  show:any;
   newlist: any;
+
   constructor(private cartService:ShoppinCartService,private router:Router) { }
   
   @ViewChild('stickyMenu',{static: false}) menuElement: ElementRef;
@@ -75,18 +74,6 @@ export class CartComponent implements OnInit {
     }
   }
 
-  /**
-   * Method to pass product Details and navigate to Checkout
-   */
-  // checkout(){
-  //   this.router.navigate(['/','checkout'])
-  // }
-  
- 
-
-
-
-
 
   /**
    * Sorting Methods
@@ -108,7 +95,7 @@ export class CartComponent implements OnInit {
 
   getItems(){
     this.newlist= this.cartService.getProducts();
-    console.log("newlist"+ JSON.stringify(this.newlist));
+    //console.log("newlist"+ JSON.stringify(this.newlist));
     for(var i=0; i<this.newlist.length; i++){
       for(var j=0; j<this.items.length;j++){
         if(this.newlist[i].id== this.items[j].id){

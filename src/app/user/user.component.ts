@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   city:string;
   contact:number;
   dataArray:any[] = [];
- 
+  nodigit:boolean;
   /**
    * Captures values of form on submit 
    * and passes into dataArray
@@ -32,7 +32,14 @@ export class UserComponent implements OnInit {
     this.cartService.setUserData(signupForm.value)
     this.router.navigate(['/','home'])
   } 
-  
+  onlyDigit(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);    
+    if(!pattern.test(inputChar) && event.charCode != '0') {
+      event.preventDefault();
+      this.nodigit = true
+    }else{this.nodigit = false}
+  }
   ngOnInit() {    
     document.body.classList.add("signup");
   }

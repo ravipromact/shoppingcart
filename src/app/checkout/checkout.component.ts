@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, QueryList, ViewChildren, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { ShoppinCartService } from '../shared/shoppin-cart.service'
 import { Router } from '@angular/router';
 
@@ -15,9 +15,7 @@ export class CheckoutComponent implements OnInit {
   orderPlaced:boolean = false;
   loader:boolean = false;
   itemsAdded:boolean
-  constructor(private cartService:ShoppinCartService,private router:Router) {
-    
-   }
+  constructor(private cartService:ShoppinCartService,private router:Router) {}
 
   ngOnInit() {
     /**
@@ -57,6 +55,8 @@ export class CheckoutComponent implements OnInit {
       localStorage.removeItem('products')
       localStorage.removeItem('userdetails')
     }, 1500);
+
+    setTimeout(()=>{this.router.navigate(['/','signup'])},3000)
     
   }
  
@@ -74,8 +74,15 @@ export class CheckoutComponent implements OnInit {
     this.arraylist = this.cartService.getProducts()   
   }
 
+  @ViewChildren('items') items: QueryList<ElementRef>;
   
-  callType(value,price,i){
+  callType(value,i){
+    
+    console.log(this.totalprice)
+
+    //console.log(i,value * this.arraylist[i].price)
+    //this.totalprice = value * this.arraylist[i].price
+    //this.totalprice = this.arraylist.reduce((acc) => acc+=this.arraylist[i].price * value, 0)
     // var asd = price * value
     // this.itemsList.map(tag => tag.price).reduce((a, b) => a + b, 0);
     // this.totalprice = this.message.reduce((value, price) => value += val.price, 0)
