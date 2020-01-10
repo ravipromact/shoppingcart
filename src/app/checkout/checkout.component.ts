@@ -30,14 +30,25 @@ export class CheckoutComponent implements OnInit {
       */
    
     if (localStorage.getItem("products") != null) {
+      
+      
       this.arraylist = this.cartService.getProducts()
+      //console.log(localStorage.getItem('totalValue'))
+      
       if(this.arraylist.length<=0){
         this.itemsAdded = false
       }else{this.itemsAdded = true}
       /**
         * To initialize cart value
         */
-      this.totalprice = this.arraylist.reduce((acc, val) => acc += val.price, 0)
+      //this.totalprice = this.arraylist.reduce((acc, val) => acc += val.price, 0)
+      //this.totalprice = this.arraylist * this.arraylist.quantity
+
+      for(var i=0;i<this.arraylist.length;i++){
+        this.totalprice+=this.arraylist[i].price * this.arraylist[i].quantity        
+      }
+
+      
     }
 
  }
@@ -74,21 +85,27 @@ export class CheckoutComponent implements OnInit {
     this.arraylist = this.cartService.getProducts()   
   }
 
-  @ViewChildren('items') items: QueryList<ElementRef>;
+  //@ViewChildren('items') items: QueryList<ElementRef>;
   
-  callType(value,i){
-    
-    console.log(this.totalprice)
-
-    //console.log(i,value * this.arraylist[i].price)
-    //this.totalprice = value * this.arraylist[i].price
-    //this.totalprice = this.arraylist.reduce((acc) => acc+=this.arraylist[i].price * value, 0)
-    // var asd = price * value
-    // this.itemsList.map(tag => tag.price).reduce((a, b) => a + b, 0);
-    // this.totalprice = this.message.reduce((value, price) => value += val.price, 0)
-    // for(i=0;i<this.products.length;i++){
-    //   this.totalprice = 
-    // }
+  callType(obj,value){
+    var newlist = this.cartService.getProducts();
+    this.arraylist.forEach(el => {
+      if(el.id === obj.id){
+        let oldQuantity = el.quantity;
+        el.quantity = parseInt(value);        
+        this.totalprice -= (oldQuantity*el.price);
+        //this.totalprice += (el.quantity*el.price); 
+        this.totalprice += (el.quantity*el.price)        
+        //this.cartService.totalValue()
+        for(var i = 0;i<newlist.length;i++){
+          if(newlist[i].id == obj.id){
+            newlist[i] = obj
+            this.cartService.setProduct(newlist)           
+          }
+        } 
+      }    
+    });    
   }
+
 
 }

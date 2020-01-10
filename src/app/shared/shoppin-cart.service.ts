@@ -17,24 +17,19 @@ export class ShoppinCartService {
   getUserData() {
     return  JSON.parse(localStorage.getItem("userdetails"))
   }
-  setProduct(id:any) {
-    localStorage.setItem("products", JSON.stringify(id));     
+  setProduct(value:any) {
+    localStorage.setItem("products", JSON.stringify(value));     
   }
   getProducts() {
     return JSON.parse(localStorage.getItem("products"))
   }
-  removeProduct(arrayList:any) {
-    localStorage.setItem("products", JSON.stringify(arrayList)); 
+  totalValue(value:any) {
+    localStorage.setItem("totalValue", JSON.stringify(value)); 
   }
+  // removeProduct(value:any) {
+  //   localStorage.setItem("products", JSON.stringify(value)); 
+  // }
   
-
-
-  
-  
-
-  
-
-   
    
 }
 

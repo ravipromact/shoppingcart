@@ -5,7 +5,7 @@ body{
     font-size: 14px;
 }
 
-
+select:focus{outline: none;}
 .btn-primary{background-color: #1ed287 !important;border-color: #1ed287 !important;}
 .btn-primary:hover {color: #fff;background-color: #26bf7f !important; border-color: #26bf7f !important;}
 .btn-primary:focus,.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {

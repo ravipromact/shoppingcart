@@ -59,20 +59,21 @@
                                                 <img [src]="x.cover" width="70" class="img-fluid mr-3 img-thumbnail">
                                                 <div>
                                                     <p class="product-title mt-2 mt-md-0">{{x.name}}</p>
-                                                    <p class="details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>
+                                                    <p class="details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s..</p>                                                    
+                                                    <div class="mt-2">
+                                                        <label class="mr-1">Qty.</label>
+                                                        <select (change)="callType(x,items.value,i)" [value]="x.quantity" #items>
+                                                            <option value="1">1</option> 
+                                                            <option value="2">2</option> 
+                                                            <option value="3">3</option> 
+                                                        </select>
+                                                    </div>     
                                                     <button class="btn btn-link product-details mr-auto mx-md-auto" type="button" data-toggle="collapse" attr.data-target="#collapse{{i}}">
                                                         Product Details
-                                                    </button>
-                                                    <!-- <select (change)="callType(items.value,i);items.value" #items>
-                                                        <option value="1">1</option> 
-                                                        <option value="2">2</option> 
-                                                        <option value="3">3</option> 
-                                                     </select>
-                                                     {{items.value * x.price}} -->
+                                                    </button>                                               
                                                     <div id="collapse{{i}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                         <div class="card-body px-0">                            
                                                         <div class="d-md-flex align-items-start">
-                                                            <!-- <img [src]="x.cover" width="150" class="mr-2 img-fluid img-thumbnail"> -->
                                                             <div class="px-md-3 games-details">
                                                                 <h4 class="mb-3 mt-3 mt-md-0">General Specification</h4>
                                                                 <p>In The Box 1 x {{x.name}} PC Game</p>
@@ -101,21 +102,15 @@
                                                         
                                                         </div>
                                                     </div>
-                                                    <!-- <label>Qty:</label>
-                                                    <select (change)="callType(items.value,x.price,i)" #items>
-                                                        <option value="1">1</option> 
-                                                        <option value="2">2</option> 
-                                                        <option value="3">3</option> 
-                                                    </select> -->
                                                 </div>
                                                 <div class="ml-md-auto d-flex align-items-center justify-content-between">                                                
-                                                    <p class="d-md-none mb-0">Price: &#x20B9;{{x.price}}</p>
+                                                    <p class="d-md-none mb-0">Price: &#x20B9;{{items.value * x.price}}</p>
                                                     <button class="btn btn-danger btn-sm" (click)="removeitem(x.id,i,x);"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                 </div>
                                                 
                                             </div>
                                         </td>
-                                        <td class="text-right d-none d-md-table-cell">&#x20B9;{{x.price}}</td>
+                                        <td class="text-right d-none d-md-table-cell">&#x20B9;{{items.value * x.price}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">

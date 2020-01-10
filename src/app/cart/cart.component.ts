@@ -55,6 +55,18 @@ export class CartComponent implements OnInit {
   }
  
   /**
+   * Method to Show Checkout 
+   * Button if cart is not empty
+   */
+  itemsCart(){
+    if(this.arraylist.length <= 0){
+      this.addedItems = false
+    }else{
+      this.addedItems = true
+    }
+  }
+
+  /**
    * Method to Remove product
    */
   removeitem(id,i){
@@ -67,11 +79,7 @@ export class CartComponent implements OnInit {
     }
     this.cartService.setProduct(this.arraylist);
     this.total = this.arraylist.length;
-    if(this.arraylist.length <= 0){
-      this.addedItems = false
-    }else{
-      this.addedItems = true
-    }
+    this.itemsCart();
   }
 
 
@@ -95,7 +103,6 @@ export class CartComponent implements OnInit {
 
   getItems(){
     this.newlist= this.cartService.getProducts();
-    //console.log("newlist"+ JSON.stringify(this.newlist));
     for(var i=0; i<this.newlist.length; i++){
       for(var j=0; j<this.items.length;j++){
         if(this.newlist[i].id== this.items[j].id){
@@ -114,11 +121,7 @@ export class CartComponent implements OnInit {
       this.getItems();
       this.arraylist = this.cartService.getProducts()  
       this.total = this.arraylist.length; 
-      if(this.arraylist.length <= 0){
-        this.addedItems = false
-      }else{
-        this.addedItems = true
-      }
+      this.itemsCart();
     }
    
   }
