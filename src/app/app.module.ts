@@ -8,12 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { CartComponent } from './cart/cart.component';
-// import { HeroChildComponent } from './cart/item-details.component';
+import { CartComponent,ProductFilter } from './cart/cart.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProductFilter,
     UserComponent,
     CheckoutComponent,
     CartComponent

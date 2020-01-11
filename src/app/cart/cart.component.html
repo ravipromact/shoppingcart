@@ -26,16 +26,19 @@
                             </a>
                         </div>
                     </div>
+                    <hr class="">
+                    <div class="search-box position-relative">
+                        <input class="form-control search-box" placeholder="Search Games" [(ngModel)]="searchTerm">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container" >    
         <div class="row">
-            <div class="col-12">                
-                <hr class="mb-0">
+            <div class="col-12">                                
                 <div class="row">
-                    <div class="col-xl-3 col-md-4 mt-4" *ngFor="let x of items;let i = index">
+                    <div class="col-xl-3 col-md-4 mt-4" *ngFor="let x of items | productFilter:searchTerm ;let i = index ">
                         <div class="card game-card">                                
                             <div class="card-body">
                                 <img [src]="x.cover" class="img-fluid game-cover">

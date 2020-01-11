@@ -1,6 +1,16 @@
-import { Component, OnInit,ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit,ElementRef, HostListener, ViewChild, Pipe, PipeTransform } from '@angular/core';
 import { ShoppinCartService } from '../shared/shoppin-cart.service'
 import { Router } from '@angular/router';
+
+interface Products{
+  id:any,
+  name:any,
+  cover:string,
+  price:any,
+  ratings:any,
+  quantity:any,
+  added:boolean
+}
 
 @Component({
   selector: 'app-cart',
@@ -8,8 +18,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.component.css']
 })
 
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit{
   arraylist:any[]=[];
+  total:any = 0;
+  addedItems:boolean = false;
+  newlist:any;
+  searchTerm:any;
+
   items=[
     {id:'assassins_creed',name:'Assassins Creed',cover:'assets/img/assassins.jpg',price:400,ratings:2.5,quantity:1,added:false},
     {id:'far_cry3',name:'Far Cry 3',cover:'assets/img/far-cry-3.jpg',price:300,ratings:3.5,quantity:1,added:false},
@@ -18,11 +33,14 @@ export class CartComponent implements OnInit {
     {id:'gta_5',name:'GTA 5',cover:'assets/img/gta_5.jpg',price:400,ratings:1.5,quantity:1,added:false},
     {id:'gta_4',name:'GTA 4',cover:'assets/img/gta_4.jpg',price:300,ratings:1.5,quantity:1,added:false},
     {id:'hitman',name:'Hitman',cover:'assets/img/hitman.jpg',price:200,ratings:3,quantity:1,added:false},
-    {id:'max_payen3',name:'Max Payne 3',cover:'assets/img/max_payen3.jpg',price:700,ratings:5,quantity:1,added:false}
+    {id:'hitman2',name:'Hitman 2',cover:'assets/img/hitman2.jpg',price:300,ratings:4,quantity:1,added:false},
+    {id:'max_payen3',name:'Max Payne 3',cover:'assets/img/max_payen3.jpg',price:700,ratings:5,quantity:1,added:false},
+    {id:'breakpoint',name:'Breakpoint',cover:'assets/img/ghost-recon-breakpoint.jpg',price:1200,ratings:4,quantity:1,added:false},
+    {id:'wildlands',name:'Wild Lands',cover:'assets/img/ghost-recon-wildlands.jpg',price:1000,ratings:3,quantity:1,added:false},
+    {id:'blackops4',name:'Black Ops 4',cover:'assets/img/codblackops4.jpg',price:1000,ratings:3,quantity:1,added:false}
   ]
-  total:any = 0;
-  addedItems:boolean = false;
-  newlist: any;
+  
+  
 
   constructor(private cartService:ShoppinCartService,private router:Router) { }
   
@@ -126,7 +144,18 @@ export class CartComponent implements OnInit {
    
   }
 
-  
+}
 
+@Pipe({
+  name:'productFilter'
+})
+
+export class ProductFilter implements PipeTransform{
+  transform(product:Products[],searchTerm:string):Products[]{
+    if(!product || !searchTerm){
+      return product
+    }
+    return product.filter(val=>val.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)
+  }
 }
 

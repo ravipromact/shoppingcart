@@ -27,7 +27,9 @@
 
 :host ::ng-deep .owl-theme .owl-nav [class*=owl-] {color: #1ed287;font-size: 20px;background: #fff;align-items: center;border-radius: 50%;width: 40px;height: 40px;border: 1px solid #1ed287;}
 :host ::ng-deep .owl-theme .owl-nav [class*=owl-]:hover {background: #1ed287;color: #FFF;} */
-
+.search-box .form-control{padding-left: 35px;font-size: 14px;}
+.search-box .form-control:focus{border-color: #1ed287;box-shadow: none;}
+.search-box:before{content: '\f002';font-family: 'FontAwesome';position: absolute;top: 7px;left: 13px;color: #696969;}
 
 
 @media(max-width:991px){
